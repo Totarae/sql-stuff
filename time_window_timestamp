@@ -1,0 +1,12 @@
+select calc_name
+  ,c1.name as cont_name
+  ,w1.name as warehouse_name
+  ,(cast(qt.end_time as date))-(cast(qt.begin_time as date))*24*60*60 as task_time
+from tabl1 qt
+join tabl2 w on qt.id_task=w.id_task and w.id_param=2
+join tabl2 c on qt.id_task=c.id_task and c.id_param=3
+join tabl3 w1 on w.number_value=w1.id_ws
+join tabl4 c1 on c.number_value=c1.id_contr
+where nvl(qt.end_time, systimestamp) between (systimestamp-NUMTODSINTERVAL(p_time_lag),'MINUTE') and systimestamp
+and qt.create_time>=systimestamp
+and qt.end_time-qt.end_time>NUMTODSINTERVAL(p_time, 'MINUTE');
