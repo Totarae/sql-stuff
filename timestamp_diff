@@ -1,0 +1,15 @@
+create table temptbl1(d1 timestamp, d2 timestamp);
+
+insert temptbl1 values(systimestamp,systimestamp+1);
+insert temptbl1 values(systimestamp,systimestamp+1/24);
+insert temptbl1 values(systimestamp,systimestamp+6/24/60);
+insert temptbl1 values(systimestamp,systimestamp+8/24/60);
+
+select * from temptbl1;
+
+select d1
+  ,d2
+  ,case when d2-d1 > numtodsinterval(8,'second') 
+    then 'yes'
+    else 'no' end
+from temptbl1;
