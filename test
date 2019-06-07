@@ -11,6 +11,13 @@ create table LOGIN_LOG
   
 );
 
+comment on table LOGIN_LOG              is  'Журнал';
+comment on column LOGIN_LOG.id          is  'Уникальный код записи';
+comment on column LOGIN_LOG.user_id     is  'Уникальный код пользователя';
+comment on column LOGIN_LOG.session_id  is  'Идентификатор сессии';
+comment on column LOGIN_LOG.logon_time  is  'Время входа';
+comment on column LOGIN_LOG.logoff_time is  'Время выхода';
+
 insert into LOGIN_LOG 
 (id, user_id, session_id, logon_time, logoff_time) 
 values 
