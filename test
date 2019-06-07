@@ -1,0 +1,33 @@
+create table LOGIN_LOG
+(
+  id          NUMBER(30) not null,
+  user_id     VARCHAR2(4000 CHAR) not null,
+  session_id  VARCHAR2(4000 CHAR) not null,
+  logon_time  DATE not null,
+  logoff_time DATE not null,
+  ----------------------------------------------------------
+  constraint LOGIN_LOG_id primary key (id) using index tablespace tblspc_oltp_index,
+  constraint LOGIN_LOG_ch1 check (logon_time <= logoff_time)
+  
+);
+
+insert into LOGIN_LOG 
+(id, user_id, session_id, logon_time, logoff_time) 
+values 
+(1,'dev','abc5', to_date('01.01.2017 08:00','dd.mm.yyyy hh24:mi'), to_date('01.01.2017 09:00','dd.mm.yyyy hh24:mi'));
+
+insert into LOGIN_LOG 
+(id, user_id, session_id, logon_time, logoff_time) 
+values 
+(2,'sta','dg6h', to_date('01.01.2017 09:00','dd.mm.yyyy hh24:mi'), to_date('01.01.2017 10:00','dd.mm.yyyy hh24:mi'));
+
+insert into LOGIN_LOG 
+(id, user_id, session_id, logon_time, logoff_time) 
+values 
+(3,'dev','sg2e', to_date('01.01.2017 08:30','dd.mm.yyyy hh24:mi'), to_date('01.01.2017 09:00','dd.mm.yyyy hh24:mi'));
+
+insert into LOGIN_LOG 
+(id, user_id, session_id, logon_time, logoff_time) 
+values 
+(4,'dev','df4k', to_date('03.01.2017 08:30','dd.mm.yyyy hh24:mi'), to_date('04.01.2017 09:00','dd.mm.yyyy hh24:mi'));
+commit;
